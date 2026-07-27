@@ -14,6 +14,8 @@ reading-resume-cards examples/sample.json --format json --output report.json
 
 The example documents the v1 input shape. Existing report files are never overwritten. Source inputs are read-only except where the documented purpose explicitly creates a new output artifact.
 
+Version 1.1 adds `previous_checkpoint`, `importance` (`low`, `medium`, `high`, or `critical`), and thread `status` (`open` or `resolved`). Markdown output is now a purpose-built resume card with recent events, character reminders, separate thread lists, changes since the previous checkpoint, and the next reading step.
+
 ## Privacy and platforms
 
 The tool runs locally and does not upload input or include telemetry. Python 3.10 or newer is supported on Windows, macOS, and Linux.
@@ -33,6 +35,6 @@ pytest
 python -m build
 ```
 
-The project is feature-complete for its documented v1 scope. Maintenance focuses on correctness, security, compatibility, and well-supported input improvements.
+Release metadata must stay aligned across the package, changelog, GitHub release, and Logan Pendragon Forge catalog.
 
 Part of the [Logan Pendragon Forge open-source collection](https://www.loganpendragonforge.com/open-source/). Licensed under the [MIT License](LICENSE).
