@@ -18,13 +18,20 @@ def _reading_resume(data: dict[str, Any]) -> dict[str, Any]:
     through = _require(data, "through")
     if not isinstance(through, int) or through < 0:
         raise ValueError("through must be a non-negative integer")
-    visible = lambda items: [item for item in items if int(item.get("milestone", 0)) <= through]
+    def visible(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        return [item for item in items if int(item.get("milestone", 0)) <= through]
+
+    events = data.get("events", [])
+    characters = data.get("characters", [])
+    threads = data.get("threads", [])
+    if not all(isinstance(items, list) for items in (events, characters, threads)):
+        raise ValueError("events, characters, and threads must be lists")
     return {
         "work": work,
         "through": through,
-        "last_events": visible(data.get("events", []))[-5:],
-        "characters": visible(data.get("characters", [])),
-        "open_threads": visible(data.get("threads", [])),
+        "last_events": visible(events)[-5:],
+        "characters": visible(characters),
+        "open_threads": visible(threads),
         "next_step": data.get("next_step", "Resume at the recorded position."),
     }
 
