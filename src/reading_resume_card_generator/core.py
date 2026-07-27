@@ -18,6 +18,7 @@ def _reading_resume(data: dict[str, Any]) -> dict[str, Any]:
     through = _require(data, "through")
     if not isinstance(through, int) or through < 0:
         raise ValueError("through must be a non-negative integer")
+
     def visible(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
         return [item for item in items if int(item.get("milestone", 0)) <= through]
 
