@@ -1,0 +1,26 @@
+{
+  "work": "Glass Harbor",
+  "through": 2,
+  "events": [
+    {
+      "milestone": 1,
+      "text": "Mara reached the ferry"
+    },
+    {
+      "milestone": 3,
+      "text": "Hidden route revealed"
+    }
+  ],
+  "characters": [
+    {
+      "milestone": 1,
+      "name": "Mara"
+    }
+  ],
+  "threads": [
+    {
+      "milestone": 2,
+      "text": "Who moved the lantern?"
+    }
+  ]
+}
