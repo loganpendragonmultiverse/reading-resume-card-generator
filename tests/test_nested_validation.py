@@ -2,8 +2,8 @@ import json
 
 import pytest
 
-from reading_resume_card_generator.core import analyze
 from reading_resume_card_generator.cli import main
+from reading_resume_card_generator.core import analyze
 from reading_resume_card_generator.preview import render_html
 
 
