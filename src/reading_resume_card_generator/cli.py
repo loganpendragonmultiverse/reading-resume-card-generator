@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from .core import analyze, render_json, render_markdown
+from .preview import render_html
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -13,20 +14,22 @@ def main(argv: list[str] | None = None) -> int:
         description="Generate a deterministic, reviewable report from explicit JSON input."
     )
     parser.add_argument("input", type=Path, help="UTF-8 JSON input file")
-    parser.add_argument("--format", choices=("markdown", "json"), default="markdown")
+    parser.add_argument("--format", choices=("markdown", "json", "html"), default="markdown")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     try:
         data = json.loads(args.input.read_text(encoding="utf-8"))
         report = analyze(data)
-        rendered = render_json(report) if args.format == "json" else render_markdown(report)
+        rendered = {"json": render_json, "markdown": render_markdown, "html": render_html}[
+            args.format
+        ](report)
         if args.output:
             if args.output.exists():
                 raise ValueError(f"output already exists: {args.output}")
             args.output.write_text(rendered, encoding="utf-8")
         else:
             sys.stdout.write(rendered)
-    except (OSError, UnicodeError, ValueError, json.JSONDecodeError) as exc:
+    except (OSError, UnicodeError, ValueError, TypeError, json.JSONDecodeError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
     return 0

@@ -38,3 +38,13 @@ python -m build
 Release metadata must stay aligned across the package, changelog, GitHub release, and Logan Pendragon Forge catalog.
 
 Part of the [Logan Pendragon Forge open-source collection](https://www.loganpendragonforge.com/open-source/). Licensed under the [MIT License](LICENSE).
+
+## Version 1.2.0: reviewed improvements
+
+Validate nested checkpoint records and add printable pocket/phone cards with checkpoint previews and hidden-item counts.
+
+```bash
+reading-resume-cards examples/sample.json --format html --output card.html
+```
+
+Work and display fields must be text; milestone/checkpoint fields must be nonnegative integers, excluding booleans. Event, character and thread records are validated before filtering. HTML supports phone and pocket-print layouts and earlier checkpoint previews, with counts of newly included and still-hidden items. Future text and unsupported extra fields are excluded from the export; only hidden-item counts remain. To advance beyond the exported ceiling, update the private input's through checkpoint and regenerate. The page does not modify the original input.
