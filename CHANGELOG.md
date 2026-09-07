@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 - 2026-09-07
+
+- Validate nested checkpoint records and add printable pocket/phone cards with checkpoint previews and hidden-item counts.
+- Added regression coverage for the audited behavior and invalid inputs.
+
 ## 1.1.0 - 2026-07-27
 
 - Added open and resolved thread separation plus importance levels.
