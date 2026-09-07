@@ -16,7 +16,7 @@ def _require(data: dict[str, Any], key: str) -> Any:
 
 def analyze(data: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(data, dict):
-        raise ValueError("input must be a JSON object")
+        raise TypeError("input must be a JSON object")
     work = _require(data, "work")
     if not isinstance(work, str) or not work.strip():
         raise ValueError("work must be nonempty text")
@@ -48,7 +48,7 @@ def analyze(data: dict[str, Any]) -> dict[str, Any]:
                 raise ValueError(f"{label} item {index} has invalid importance")
             field = "name" if label == "characters" else "text"
             if not isinstance(value.get(field), str):
-                raise ValueError(f"{label} item {index} {field} must be text")
+                raise TypeError(f"{label} item {index} {field} must be text")
             status = value.get("status", "open")
             if label == "threads" and (
                 not isinstance(status, str) or status not in {"open", "resolved"}
@@ -74,7 +74,7 @@ def analyze(data: dict[str, Any]) -> dict[str, Any]:
     if invalid:
         raise ValueError("thread status must be open or resolved")
     if not isinstance(data.get("next_step", ""), str):
-        raise ValueError("next_step must be text")
+        raise TypeError("next_step must be text")
     return {
         "version": 2,
         "project": PROJECT,
