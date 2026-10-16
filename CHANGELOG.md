@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 2026-10-16
+
+- Added explicit thread resolution milestones, checkpoint-safe status and resolution deltas.
+- Kept future resolution metadata outside exported cards and preserved legacy thread behavior.
+
 ## 1.2.0 - 2026-09-07
 
 - Validate nested checkpoint records and add printable pocket/phone cards with checkpoint previews and hidden-item counts.

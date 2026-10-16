@@ -54,13 +54,38 @@ def analyze(data: dict[str, Any]) -> dict[str, Any]:
                 not isinstance(status, str) or status not in {"open", "resolved"}
             ):
                 raise ValueError(f"threads item {index} status must be open or resolved")
+            resolution = value.get("resolution_milestone")
+            if (
+                label == "threads"
+                and "resolution_milestone" in value
+                and (
+                    not isinstance(resolution, int)
+                    or isinstance(resolution, bool)
+                    or resolution < milestone
+                    or status != "resolved"
+                )
+            ):
+                raise ValueError(
+                    f"threads item {index} resolution_milestone must be an integer "
+                    "at or after milestone with resolved status"
+                )
+            effective_status = status
+            if label == "threads" and resolution is not None and resolution > through:
+                effective_status = "open"
             if milestone <= through:
                 result.append(
                     {
                         field: value[field],
                         "milestone": milestone,
                         "importance": importance,
-                        **({"status": status} if label == "threads" else {}),
+                        **({"status": effective_status} if label == "threads" else {}),
+                        **(
+                            {"resolution_milestone": resolution}
+                            if label == "threads"
+                            and resolution is not None
+                            and resolution <= through
+                            else {}
+                        ),
                     }
                 )
         return result
@@ -93,7 +118,11 @@ def analyze(data: dict[str, Any]) -> dict[str, Any]:
         "changes_since_previous": {
             "events": [x for x in events if x["milestone"] > previous],
             "characters": [x for x in characters if x["milestone"] > previous],
-            "threads": [x for x in threads if x["milestone"] > previous],
+            "threads": [
+                x
+                for x in threads
+                if x["milestone"] > previous or x.get("resolution_milestone", 0) > previous
+            ],
         },
         "next_step": data.get("next_step", "Resume at the recorded position."),
     }

@@ -29,8 +29,9 @@ let newly=0,hidden=Object.values(data.still_hidden).reduce((a,b)=>a+b,0);
 for(const [label,items] of [['Events',data.visible_events],['Characters',data.characters],['Threads',[...data.open_threads,...data.resolved_threads]]]){
  const h=document.createElement('h3');h.textContent=label;card.append(h);const ul=document.createElement('ul');
  for(const item of items){if(item.milestone>through){hidden++;continue;}const li=document.createElement('li');
- const fresh=item.milestone>data.previous_checkpoint;if(fresh)newly++;
- li.textContent=`${fresh?'New: ':''}${item.text??item.name} · milestone ${item.milestone}`;ul.append(li);}card.append(ul);
+ const resolved=item.status==='resolved'&&(item.resolution_milestone??item.milestone)<=through;
+ const fresh=item.milestone>data.previous_checkpoint||(resolved&&(item.resolution_milestone??0)>data.previous_checkpoint); if(fresh)newly++;
+ li.textContent=`${fresh?'New: ':''}${item.text??item.name}${item.status?' · '+(resolved?'resolved':'open'):''} · milestone ${item.milestone}`;ul.append(li);}card.append(ul);
 }document.getElementById('status').textContent=`${newly} facts since the previous checkpoint; ${hidden} items remain hidden. Export ceiling ${data.through}.`;
 card.style.maxWidth=document.getElementById('layout').value==='pocket'?'95mm':'100%';}
 checkpoint.addEventListener('input',draw);document.getElementById('layout').addEventListener('change',draw);draw();</script></html>"""
