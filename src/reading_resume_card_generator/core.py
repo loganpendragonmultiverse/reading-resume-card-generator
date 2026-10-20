@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import html
 import json
+import re
 from typing import Any
 
 PROJECT = "reading-resume-card-generator"
@@ -90,7 +92,7 @@ def analyze(data: dict[str, Any]) -> dict[str, Any]:
                 )
         return result
 
-    events = normalized("events")
+    events = sorted(normalized("events"), key=lambda item: item["milestone"])
     characters = normalized("characters")
     threads = normalized("threads")
     open_threads = [item for item in threads if item.get("status", "open") == "open"]
@@ -132,23 +134,29 @@ def render_json(report: dict[str, Any]) -> str:
     return json.dumps(report, indent=2, ensure_ascii=False, default=str) + "\n"
 
 
+def _literal(value: object) -> str:
+    """Render authored text on one Markdown line without introducing markup."""
+    text = " ".join(str(value).splitlines())
+    return re.sub(r"([\\`*_{}\[\]()#+.!|>~-])", r"\\\1", html.escape(text, quote=False))
+
+
 def _items(lines: list[str], title: str, values: list[dict[str, Any]], field: str) -> None:
     lines.extend([f"## {title}", ""])
     if not values:
         lines.append("- None recorded.")
     for item in values:
         lines.append(
-            f"- **{item['importance'].title()}** - {item.get(field, item.get('text', ''))} (milestone {item['milestone']})"
+            f"- **{item['importance'].title()}** - {_literal(item.get(field, item.get('text', '')))} (milestone {item['milestone']})"
         )
     lines.append("")
 
 
 def render_markdown(report: dict[str, Any]) -> str:
     lines = [
-        f"# Reading Resume Card Generator: {report['work']}",
+        f"# Reading Resume Card Generator: {_literal(report['work'])}",
         "",
         f"Checkpoint: **{report['through']}**",
-        f"Next: {report['next_step']}",
+        f"Next: {_literal(report['next_step'])}",
         "",
     ]
     _items(lines, "Recent Events", report["last_events"], "text")

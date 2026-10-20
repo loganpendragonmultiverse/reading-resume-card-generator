@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.1 - 2026-10-20
+
+- Select the five most recent visible events by supplied milestone, retaining authored order for ties. Create outputs exclusively so existing files and symbolic-link destinations remain untouched.
+
+- Markdown treats supplied text as literal, single-line content so notes cannot introduce HTML or forged checklist headings. JSON retains the original text.
+
 ## 1.3.0 - 2026-10-16
 
 - Added explicit thread resolution milestones, checkpoint-safe status and resolution deltas.
