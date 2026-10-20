@@ -4,3 +4,5 @@ recursive-include examples *
 include DEVELOPMENT.md TESTING.md
 
 include tests/preview_browser.cjs
+
+include DEVELOPMENT.md TESTING.md

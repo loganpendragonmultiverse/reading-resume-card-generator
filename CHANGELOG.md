@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.3.1 - 2026-10-20
+## 1.3.2 - 2026-10-20
+
+- Include development and testing instructions in source distributions. The preceding 1.3.1 tag was held before public release when distribution acceptance found these missing files.
+
+## 1.3.1 - 2026-10-20 (unpublished tag)
 
 - Select the five most recent visible events by supplied milestone, retaining authored order for ties. Create outputs exclusively so existing files and symbolic-link destinations remain untouched.
 
