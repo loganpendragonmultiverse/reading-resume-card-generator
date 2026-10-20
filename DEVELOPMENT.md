@@ -27,6 +27,6 @@ ceiling still limits available facts. Resolution changes after `previous_checkpo
 are included in thread deltas once visible. Omitting the field preserves the
 existing behavior: status applies at the thread's original milestone.
 
-## Version 1.3.1
+## Version 1.3.2
 
 Select the five most recent visible events by supplied milestone, retaining authored order for ties. Create outputs exclusively so existing files and symbolic-link destinations remain untouched.

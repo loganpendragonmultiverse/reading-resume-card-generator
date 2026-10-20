@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.3.1 - 2026-10-20
+## 1.3.2 - 2026-10-20
+
+- Package the four guides and examples with the installed wheel and source distribution. The preceding tag was held before public release when exact distribution acceptance found missing installed guides/examples.
+
+## 1.3.1 - 2026-10-20 (unpublished tag)
 
 - Select the five most recent visible events by supplied milestone, retaining authored order for ties. Create outputs exclusively so existing files and symbolic-link destinations remain untouched.
 
