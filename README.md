@@ -69,3 +69,5 @@ existing behavior: status applies at the thread's original milestone.
 Select the five most recent visible events by supplied milestone, retaining authored order for ties. Create outputs exclusively so existing files and symbolic-link destinations remain untouched.
 
 Markdown treats supplied text as literal, single-line content so notes cannot introduce HTML or forged checklist headings. JSON retains the original text.
+
+Existing output symbolic links are refused explicitly on Windows as well as POSIX. Output directories should remain under your control while a command runs.

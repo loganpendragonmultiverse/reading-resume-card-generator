@@ -10,3 +10,5 @@ Resolution fixtures cover before/on/after boundaries, chronology, export ceiling
 unsupported spoiler canaries, previous-checkpoint deltas and legacy status.
 
 Gold regression fixtures cover malformed records, preserved sources, and exclusive output creation. Run the full suite and install both wheel and source distribution in fresh environments before release.
+
+Existing output symbolic links are refused explicitly on Windows as well as POSIX. Output directories should remain under your control while a command runs.
