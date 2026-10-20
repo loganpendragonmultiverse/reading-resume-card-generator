@@ -71,3 +71,5 @@ Select the five most recent visible events by supplied milestone, retaining auth
 Markdown treats supplied text as literal, single-line content so notes cannot introduce HTML or forged checklist headings. JSON retains the original text.
 
 Existing output symbolic links are refused explicitly on Windows as well as POSIX. Output directories should remain under your control while a command runs.
+
+Wheels install README, development, testing and changelog guides at `share/reading-resume-card-generator/` under the Python environment, with editable examples in its `examples/` subdirectory. Both release distributions must contain these exact tagged files.

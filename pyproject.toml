@@ -35,3 +35,7 @@ omit = ["src/*/__main__.py"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--cov=reading_resume_card_generator --cov-branch --cov-report=term-missing --cov-fail-under=90"
+
+[tool.setuptools.data-files]
+"share/reading-resume-card-generator" = ["README.md", "DEVELOPMENT.md", "TESTING.md", "CHANGELOG.md", "LICENSE"]
+"share/reading-resume-card-generator/examples" = ["examples/sample.json"]
